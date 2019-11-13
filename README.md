@@ -1,8 +1,8 @@
 # Voucher-Validation
 
-##Description : This is a demo application built uisng Django. 
+## Description : This is a demo application built uisng Django. 
 
-##Functionality Covered: 
+## Functionality Covered: 
 (1) Created a html page with a form with field `Voucher Code` for user to enter the voucher code and get the discount value.
 (2) The form will validate the voucher code from the database details and update the user if the voucher code is valid or not.
 (3) It will then show the amount of discount user is getting as per the voucher he/she has selceted.
@@ -11,9 +11,9 @@
 (6) Designed and created model for Voucher and Vouchercount(To keep a track of how many times the code is redeemed).
 (7) Created Django admin `http://localhost/site-admin/` to setup voucher data and discount detail.
 
-##Configuration : Please set up the settings.py file as per the user requirement.
+## Configuration : Please set up the settings.py file as per the user requirement.
 
-###How to run Once the app starts, go to the web browser and visit http://localhost:8000/index/
+### How to run Once the app starts, go to the web browser and visit http://localhost:8000/index/
 
 (1) python manage.py createsuperuser:
 Create an admin login to set the data for the voucher code and discount value.
