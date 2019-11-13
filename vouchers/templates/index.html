@@ -1,0 +1,68 @@
+{% extends "base-site.html" %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div>
+		<label for="voucherCode">Voucher Code:</label>
+		<input type="text" id="voucherCode" name="voucherCode" required style="margin-left: 10px;">
+	</div>
+
+     <div>
+		<label for="discount">Discount:</label>
+		<input type="text" id="discount" name="discount" required style="margin-left: 42px;" readonly>
+	</div>
+
+	<div class="button" style="width: 58px;" >
+		<button type="submit" onclick="return confirm('Do you want to submit the form?');">Submit</button>
+	</div>
+    </form>
+
+    <script type="text/javascript">
+    $("#voucherCode").change(function () {
+	    console.log("Value of voucher code is changed.")
+        var voucherCode = $(this).val();
+	    console.log("Value of voucher code is ",voucherCode)
+        $.ajax({
+	        type:"GET",
+            url: 'getVoucherCode',
+            dataType: 'json',
+            success: function (data) {
+                if (Object.keys(data).indexOf(voucherCode) > -1) {
+                    alert("Congratulations! Voucher code is valid.");
+                    var discount = data[voucherCode]
+                    console.log("Value of discount is ",discount)
+                    alert("Congratulations! You receive a discount of " + discount)
+                    document.getElementById("discount").value = discount
+                }
+                else{
+                    alert("Sorry! The voucher code is invalid. Please enter a valid voucher code.");
+			        $("#voucherCode").val('');
+			        $("#discount").val('');
+                }
+     }
+     });
+     });
+    </script>
+
+    <script type="text/javascript">
+    $(document).on("keydown", ":input:not(textarea)", function(event) {
+        if (event.key == "Enter") {
+            event.preventDefault();
+    }
+    });
+    </script>
+
+{% endblock %}
+
+</body>
+</html>
+
+
